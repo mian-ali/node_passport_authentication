@@ -9,7 +9,6 @@ const app=express()
 const db =require('./config/keys').mongoURI
 
 // Connect to MongoDB
-
 mongoose
   .connect(
     db,
@@ -18,10 +17,13 @@ mongoose
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
 
-  
+
 // EJS
 app.use(expressLayouts)
 app.set('view engine' , 'ejs')
+
+// Express body parser
+app.use(express.urlencoded({ extended: true }));
 
 //Routes 
 app.use('/', require('./routes/index'))
